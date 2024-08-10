@@ -1,11 +1,102 @@
+/* Estilo Geral do Corpo */
 body {
-    background-color: #f8f9fa;
-  }
-  .form-container {
-    margin: 0% 25% 5% 25%;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-  }
-  
+  background-color: #3D265E; /* Fundo principal lilás */
+  color: #ffffff; /* Texto branco para contraste */
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilo do Contêiner do Formulário */
+.form-container {
+  background-color: #ffffff; /* Fundo branco para destacar o formulário */
+  margin: 0% 25% 5% 25%;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Botões */
+button {
+  background-color: #FFAB62; /* Fundo laranja para botões */
+  color: #3D265E; /* Texto lilás */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #00ACA2; /* Muda para verde no hover */
+  color: #ffffff; /* Texto branco no hover */
+}
+
+/* Cabeçalhos */
+h2, h3 {
+  color: #00ACA2; /* Verde para cabeçalhos */
+}
+
+/* Links */
+a {
+  color: #FFAB62; /* Laranja para links */
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ffffff; /* Branco no hover */
+}
+
+/* Tabelas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  background-color: #3D265E; /* Fundo lilás para cabeçalhos da tabela */
+  color: #ffffff; /* Texto branco */
+  padding: 10px;
+}
+
+td {
+  background-color: #ffffff; /* Fundo branco para células da tabela */
+  color: #3D265E; /* Texto lilás */
+  padding: 10px;
+  border: 1px solid #3D265E; /* Borda lilás */
+}
+
+.table-responsive {
+  margin-top: 20px;
+}
+
+/* Ajuste das cores do formulário */
+.form-control {
+  border: 1px solid #00ACA2; /* Borda verde */
+  border-radius: 4px;
+  padding: 10px;
+  color: #3D265E; /* Texto lilás */
+}
+
+.form-control:focus {
+  border-color: #FFAB62; /* Borda laranja ao focar */
+  box-shadow: 0 0 5px rgba(255, 171, 98, 0.5); /* Sombra laranja */
+}
+
+label {
+  color: #3D265E; /* Cor do texto do rótulo */
+}
+
+/* Card */
+.card-header {
+  background-color: #00ACA2; /* Cabeçalho verde */
+  color: #ffffff; /* Texto branco */
+  font-weight: bold;
+}
+
+.card-body {
+  background-color: #f8f9fa; /* Fundo cinza claro */
+  border-radius: 0 0 8px 8px;
+  padding: 20px;
+}
