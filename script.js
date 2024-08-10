@@ -42,6 +42,24 @@ document.getElementById("cpf").addEventListener("change", function (e) {
   ativaDesativaEnviar(verificarCampos());
 });
 
+// validação nascimento
+
+document.getElementById("nascimento").addEventListener("change", function (e) {
+  const nascimento = e.target.value;
+  if (!nascimento) {
+      showError("nascimento", "Data de nascimento é obrigatória.");
+  } else {
+      const dataValida = validarDataNascimento(nascimento);
+
+      if (!dataValida) {
+          showError("nascimento", "Data de nascimento inválida.");
+      } else {
+          hideError("nascimento");
+      }
+  }
+  ativaDesativaEnviar(verificarCampos());
+});
+
 //Validação do Email
 document.getElementById("email").addEventListener("change", function (e) {
   const email = e.target.value;
@@ -101,6 +119,7 @@ function verificarCampos() {
     const estado = document.getElementById("estado").value.trim();
     const prova1 = parseFloat(document.getElementById("prova1").value);
     const prova2 = parseFloat(document.getElementById("prova2").value);
+    const nascimento = document.getElementById("nascimento").value
 
     const nomeIsValid = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/.test(nome);
     const cpfIsValid = validarCPF(cpf);
@@ -110,6 +129,7 @@ function verificarCampos() {
     const estadoIsValid = estado !== "";
     const prova1IsValid = prova1 >= 0 && prova1 <= 10;
     const prova2IsValid = prova2 >= 0 && prova2 <= 10;
+    const nascimentoIsValid = nascimento !== "" && validarDataNascimento(nascimento)
 
     return (
         nomeIsValid &&
@@ -119,7 +139,8 @@ function verificarCampos() {
         cidadeIsValid &&
         estadoIsValid &&
         prova1IsValid &&
-        prova2IsValid
+        prova2IsValid &&
+        nascimentoIsValid
     );
 }
 
@@ -206,9 +227,36 @@ function validarCPF(cpf) {
     d = ((10 * d) % 11) % 10;
     if (cpf[t] != d) return false;
   }
-
   return true;
 }
+
+function validarDataNascimento(data) {
+  const hoje = new Date();
+  const nascimento = new Date(data);
+  
+  const idade = hoje.getFullYear() - nascimento.getFullYear();
+  const mes = hoje.getMonth() - nascimento.getMonth();
+  
+  if (mes < 0 || (mes === 0 && hoje.getDate() < nascimento.getDate())) {
+      idade--;
+  }
+
+  // Validações:
+  // 1. Data não pode ser no futuro
+  if (nascimento > hoje) {
+      return false;
+  }
+  // 2. Idade não pode ser maior que 150 anos (evitar datas muito antigas)
+  if (idade > 150) {
+      return false;
+  }
+  // 3. Opcional: pode adicionar uma validação para maioridade (ex: idade >= 18)
+  // if (idade < 18) {
+  //     return false;
+  // }
+  return true;
+}
+
 /*Funções de validação*/
 function validarNumero(numero) {
   // Verifica se o número está entre 0 e 10
