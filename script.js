@@ -9,56 +9,146 @@ document.getElementById("name").addEventListener("input", function (e) {
   const nomeIsValid = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/.test(nome); // Apenas letras e espaços
   if (!nomeIsValid) {
       e.target.value = nome.slice(0, -1);
-      showError("Nome deve conter apenas letras.");
+      showError("name", "Nome deve conter apenas letras.");
   } else {
-      hideError();
+      hideError("name");
   }
   ativaDesativaEnviar(verificarCampos());
 });
 
-//validacão de cpf
+// Validação do CPF
 document.getElementById("cpf").addEventListener("input", function (e) {
   const input = e.target.value;
   const cpfIsValid = /^[0-9]*$/.test(input);
   if (!cpfIsValid) {
-    e.target.value = input.slice(0, -1);
-    document.getElementById("cpf-erro-message").style.display = "block";
+      e.target.value = input.slice(0, -1);
+      showError("cpf", "CPF deve conter apenas números.");
   } else {
-    document.getElementById("cpf-erro-message").style.display = "none";
+      hideError("cpf");
   }
 });
 
-//mascara do cpf
 document.getElementById("cpf").addEventListener("change", function (e) {
-  e.target.value = mascararCPF(e.target.value);
-  /*validarCPF(e.target.value) === true
-    ? document.getElementById("enviar").removeAttribute("disabled")
-    : document.getElementById("enviar").setAttribute("disabled", true);*/
-  ativaDesativaEnviar(validarCPF(e.target.value));
+  const cpf = e.target.value;
+  const cpfFormatado = mascararCPF(cpf);
+  e.target.value = cpfFormatado;
+  
+  if (!validarCPF(cpf)) {
+      showError("cpf", "CPF inválido.");
+  } else {
+      hideError("cpf");
+  }
+
+  ativaDesativaEnviar(verificarCampos());
 });
 
-document.getElementById("prova1").addEventListener("change", function (e) {
-  ativaDesativaEnviar(validarNumero(e.target.value));
-});
-document.getElementById("prova2").addEventListener("change", function (e) {
-  ativaDesativaEnviar(validarNumero(e.target.value));
-});
-
-
+//Validação do Email
 document.getElementById("email").addEventListener("change", function (e) {
-  ativaDesativaEnviar(validarVazio(e.target.value));
+  const email = e.target.value;
+  const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); // Validação básica de email
+  if (!emailIsValid) {
+      showError("email", "Email inválido.");
+  } else {
+      hideError("email");
+  }
+  ativaDesativaEnviar(verificarCampos());
 });
+
+//validação tlf
 document.getElementById("telefone").addEventListener("change", function (e) {
   ativaDesativaEnviar(validarVazio(e.target.value));
   e.target.value = mascaraTelefone(e.target.value);
   ativaDesativaEnviar(validarTelefone(e.target.value));
 });
+
 document.getElementById("cidade").addEventListener("change", function (e) {
   ativaDesativaEnviar(validarVazio(e.target.value));
 });
 document.getElementById("estado").addEventListener("change", function (e) {
   ativaDesativaEnviar(validarVazio(e.target.value));
 });
+
+// Validação de Prova 1
+document.getElementById("prova1").addEventListener("input", function (e) {
+  const valor = parseFloat(e.target.value);
+  if (isNaN(valor) || valor < 0 || valor > 10) {
+      showError("prova1", "Prova 1 deve ser um número entre 0 e 10.");
+  } else {
+      hideError("prova1");
+  }
+  ativaDesativaEnviar(verificarCampos());
+});
+
+// Validação de Prova 2
+document.getElementById("prova2").addEventListener("input", function (e) {
+  const valor = parseFloat(e.target.value);
+  if (isNaN(valor) || valor < 0 || valor > 10) {
+      showError("prova2", "Prova 2 deve ser um número entre 0 e 10.");
+  } else {
+      hideError("prova2");
+  }
+  ativaDesativaEnviar(verificarCampos());
+});
+
+
+// Função para verificar se todos os campos estão preenchidos corretamente
+function verificarCampos() {
+    const nome = document.getElementById("name").value.trim();
+    const cpf = document.getElementById("cpf").value;
+    const email = document.getElementById("email").value.trim();
+    const telefone = document.getElementById("telefone").value.trim();
+    const cidade = document.getElementById("cidade").value.trim();
+    const estado = document.getElementById("estado").value.trim();
+    const prova1 = parseFloat(document.getElementById("prova1").value);
+    const prova2 = parseFloat(document.getElementById("prova2").value);
+
+    const nomeIsValid = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/.test(nome);
+    const cpfIsValid = validarCPF(cpf);
+    const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const telefoneIsValid = validarTelefone(telefone);
+    const cidadeIsValid = cidade !== "";
+    const estadoIsValid = estado !== "";
+    const prova1IsValid = prova1 >= 0 && prova1 <= 10;
+    const prova2IsValid = prova2 >= 0 && prova2 <= 10;
+
+    return (
+        nomeIsValid &&
+        cpfIsValid &&
+        emailIsValid &&
+        telefoneIsValid &&
+        cidadeIsValid &&
+        estadoIsValid &&
+        prova1IsValid &&
+        prova2IsValid
+    );
+}
+
+// Funções de erro
+function showError(campoId, mensagem) {
+  // Seleciona ou cria um contêiner de mensagem de erro abaixo do campo
+  let campo = document.getElementById(campoId);
+  let errorContainer = campo.parentNode.querySelector(".error-message");
+
+  if (!errorContainer) {
+      // Cria um novo contêiner de erro se não existir
+      errorContainer = document.createElement("p");
+      errorContainer.className = "error-message";
+      errorContainer.style.color = "red";
+      campo.parentNode.appendChild(errorContainer);
+  }
+
+  // Define a mensagem de erro
+  errorContainer.textContent = mensagem;
+}
+
+function hideError(campoId) {
+  // Seleciona o contêiner de mensagem de erro e remove se existir
+  let campo = document.getElementById(campoId);
+  let errorContainer = campo.parentNode.querySelector(".error-message");
+  if (errorContainer) {
+      errorContainer.remove();
+  }
+}
 
 const students = [];
 
@@ -162,6 +252,7 @@ function ativaDesativaEnviar(valor) {
     : document.getElementById("enviar").setAttribute("disabled", true);
 }
 /**Funções de máscara */
+
 function mascararCPF(input) {
   input = input.replace(/(\d{3})(\d)/, "$1.$2");
   input = input.replace(/(\d{3})(\d)/, "$1.$2");
