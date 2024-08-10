@@ -1,6 +1,22 @@
 //console.log("Projeto Turma 48");
 document.getElementById("enviar").setAttribute("disabled", true);
+
 document.getElementById("enviar").removeAttribute("disabled");
+
+//validacão name
+document.getElementById("name").addEventListener("input", function (e) {
+  const nome = e.target.value;
+  const nomeIsValid = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/.test(nome); // Apenas letras e espaços
+  if (!nomeIsValid) {
+      e.target.value = nome.slice(0, -1);
+      showError("Nome deve conter apenas letras.");
+  } else {
+      hideError();
+  }
+  ativaDesativaEnviar(verificarCampos());
+});
+
+//validacão de cpf
 document.getElementById("cpf").addEventListener("input", function (e) {
   const input = e.target.value;
   const cpfIsValid = /^[0-9]*$/.test(input);
@@ -12,6 +28,7 @@ document.getElementById("cpf").addEventListener("input", function (e) {
   }
 });
 
+//mascara do cpf
 document.getElementById("cpf").addEventListener("change", function (e) {
   e.target.value = mascararCPF(e.target.value);
   /*validarCPF(e.target.value) === true
@@ -27,9 +44,7 @@ document.getElementById("prova2").addEventListener("change", function (e) {
   ativaDesativaEnviar(validarNumero(e.target.value));
 });
 
-document.getElementById("name").addEventListener("change", function (e) {
-  ativaDesativaEnviar(validarVazio(e.target.value));
-});
+
 document.getElementById("email").addEventListener("change", function (e) {
   ativaDesativaEnviar(validarVazio(e.target.value));
 });
