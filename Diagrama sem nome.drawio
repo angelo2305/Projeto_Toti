@@ -1,9 +1,42 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36" version="27.1.6">
-  <diagram name="Página-1" id="xPZrYnUFyH7yIigFjtHM">
-    <mxGraphModel dx="604" dy="734" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+  <diagram name="Sistema Restaurante" id="xPZrYnUFyH7yIigFjtHM">
+    <mxGraphModel dx="1485" dy="735" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
+        <mxCell id="rOPuFsN8TL-WDSFUG8BE-1" value="Cliente&#xa;- ID_Cliente (PK)&#xa;- Nome&#xa;- Hora_Chegada&#xa;- Hora_Saída" style="shape=rectangle;whiteSpace=wrap;rounded=1;fillColor=#DAE8FC;" vertex="1" parent="1">
+          <mxGeometry x="134" y="210" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rOPuFsN8TL-WDSFUG8BE-2" value="Mesa&#xa;- ID_Mesa (PK)&#xa;- Número" style="shape=rectangle;whiteSpace=wrap;rounded=1;fillColor=#FFE6CC;" vertex="1" parent="1">
+          <mxGeometry x="334" y="210" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rOPuFsN8TL-WDSFUG8BE-3" value="Atendente&#xa;- ID_Atendente (PK)&#xa;- Nome" style="shape=rectangle;whiteSpace=wrap;rounded=1;fillColor=#FFF2CC;" vertex="1" parent="1">
+          <mxGeometry x="534" y="210" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rOPuFsN8TL-WDSFUG8BE-4" value="Pedido&#xa;- ID_Pedido (PK)&#xa;- Data_Hora&#xa;- ID_Cliente (FK)&#xa;- ID_Mesa (FK)&#xa;- ID_Atendente (FK)" style="shape=rectangle;whiteSpace=wrap;rounded=1;fillColor=#D5E8D4;" vertex="1" parent="1">
+          <mxGeometry x="284" y="330" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="rOPuFsN8TL-WDSFUG8BE-5" value="ItemPedido&#xa;- ID_Item (PK)&#xa;- ID_Pedido (FK)&#xa;- ID_Prato (FK)&#xa;- Quantidade" style="shape=rectangle;whiteSpace=wrap;rounded=1;fillColor=#E1D5E7;" vertex="1" parent="1">
+          <mxGeometry x="284" y="470" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rOPuFsN8TL-WDSFUG8BE-6" value="Prato&#xa;- ID_Prato (PK)&#xa;- Nome&#xa;- Preço" style="shape=rectangle;whiteSpace=wrap;rounded=1;fillColor=#F8CECC;" vertex="1" parent="1">
+          <mxGeometry x="534" y="470" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="rOPuFsN8TL-WDSFUG8BE-7" style="endArrow=none;" edge="1" parent="1" source="rOPuFsN8TL-WDSFUG8BE-1" target="rOPuFsN8TL-WDSFUG8BE-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rOPuFsN8TL-WDSFUG8BE-8" style="endArrow=none;" edge="1" parent="1" source="rOPuFsN8TL-WDSFUG8BE-2" target="rOPuFsN8TL-WDSFUG8BE-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rOPuFsN8TL-WDSFUG8BE-9" style="endArrow=none;" edge="1" parent="1" source="rOPuFsN8TL-WDSFUG8BE-3" target="rOPuFsN8TL-WDSFUG8BE-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rOPuFsN8TL-WDSFUG8BE-10" style="endArrow=none;" edge="1" parent="1" source="rOPuFsN8TL-WDSFUG8BE-4" target="rOPuFsN8TL-WDSFUG8BE-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rOPuFsN8TL-WDSFUG8BE-11" style="endArrow=none;" edge="1" parent="1" source="rOPuFsN8TL-WDSFUG8BE-5" target="rOPuFsN8TL-WDSFUG8BE-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
